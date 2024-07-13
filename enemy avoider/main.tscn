@@ -10,6 +10,7 @@ size = Vector2(126, 124)
 
 [node name="Player" type="CharacterBody2D" parent="."]
 position = Vector2(393, 263)
+motion_mode = 1
 script = ExtResource("1_vd3oa")
 
 [node name="Sprite2D" type="Sprite2D" parent="Player"]
