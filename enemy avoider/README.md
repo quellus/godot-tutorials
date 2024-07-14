@@ -34,3 +34,29 @@ func _physics_process(delta):
 ```
 
 Now you can use the arrow keys to move the player
+
+# Creating the enemy
+1. Create a `CharacterBody2D` node in the scene
+    1. Rename the node to `Enemy`
+    2. Set `Motion Mode` to `Floating`
+	3. Set Transform -> Scale to (0.5, 0.5)
+2. Create `Sprite2D` as a child of the Player
+    1. Set the `Texture` to icon.svg
+3. Create a `CollisionShape2D` as a child of the Player
+    1. Set its shape to `RectangleShape2D`
+    2. Resize it to match the size of the image
+4. Add a script to the Enemy called `Enemy.gd`
+```
+extends CharacterBody2D
+
+@onready var player = $"../Player"
+
+const SPEED = 100
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	velocity = position.direction_to(player.position) * SPEED
+	move_and_slide()
+```
+5. Bring the Enemy scene into the main scene
