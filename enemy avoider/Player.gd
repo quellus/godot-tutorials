@@ -11,3 +11,7 @@ func _physics_process(delta):
 		velocity.y = move_toward(velocity.y, 0, SPEED)
 
 	move_and_slide()
+
+
+func _on_area_2d_body_entered(body):
+	get_tree().quit()

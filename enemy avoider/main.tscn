@@ -1,5 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://c5oeeag47qkhc"]
+[gd_scene load_steps=7 format=3 uid="uid://c5oeeag47qkhc"]
 
+[ext_resource type="Script" path="res://main.gd" id="1_erbv8"]
 [ext_resource type="Script" path="res://Player.gd" id="1_vd3oa"]
 [ext_resource type="Texture2D" uid="uid://bq7f4ccbyabmk" path="res://icon.svg" id="2_st8cs"]
 [ext_resource type="PackedScene" uid="uid://bv53mlaco0t6i" path="res://Enemy.tscn" id="3_py4l7"]
@@ -7,11 +8,16 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f7oks"]
 size = Vector2(126, 124)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c3r3s"]
+size = Vector2(132, 128)
+
 [node name="Node2D" type="Node2D"]
+script = ExtResource("1_erbv8")
 
 [node name="Player" type="CharacterBody2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(393, 263)
+scale = Vector2(0.5, 0.5)
 motion_mode = 1
 script = ExtResource("1_vd3oa")
 
@@ -21,4 +27,19 @@ texture = ExtResource("2_st8cs")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 shape = SubResource("RectangleShape2D_f7oks")
 
+[node name="Area2D" type="Area2D" parent="Player"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Area2D"]
+shape = SubResource("RectangleShape2D_c3r3s")
+
 [node name="Enemy" parent="." instance=ExtResource("3_py4l7")]
+collision_layer = 3
+
+[node name="EnemySpawnTimer" type="Timer" parent="."]
+wait_time = 4.0
+autostart = true
+
+[connection signal="body_entered" from="Player/Area2D" to="Player" method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_enemy_spawn_timer_timeout"]
