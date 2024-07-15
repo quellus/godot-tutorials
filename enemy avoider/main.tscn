@@ -41,5 +41,17 @@ collision_layer = 3
 wait_time = 4.0
 autostart = true
 
+[node name="SpawnPoint" type="Node2D" parent="." groups=["spawnpoint"]]
+position = Vector2(-121, -137)
+
+[node name="SpawnPoint2" type="Node2D" parent="." groups=["spawnpoint"]]
+position = Vector2(-137, 813)
+
+[node name="SpawnPoint3" type="Node2D" parent="." groups=["spawnpoint"]]
+position = Vector2(1315, 828)
+
+[node name="SpawnPoint4" type="Node2D" parent="." groups=["spawnpoint"]]
+position = Vector2(1366, -137)
+
 [connection signal="body_entered" from="Player/Area2D" to="Player" method="_on_area_2d_body_entered"]
 [connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_enemy_spawn_timer_timeout"]
