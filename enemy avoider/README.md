@@ -1,5 +1,7 @@
 # Enemy Avoider Game
-Tutorial to make a basic 2D character controller and enemies that chase you
+Tutorial to make a basic 2D character controller and enemies that chase you.
+
+If you want to make a top-down game. Whether it’s a survivors-like, shooter, or RPG. This tutorial will be a good starting point. Well go over controlling your character, spawning enemies that chase your character, and taking damage when an enemy touches you.
 
 # Setup
 1. Create a new Godot project
@@ -80,14 +82,15 @@ Now you can use the arrow keys to move the player
         move_and_slide()
     ```
     - Every frame, the enemy gets the direction to the player and moves towards it using a similar method to the player controller
-5. Bring the Enemy scene into the main scene
+5. Bring the Enemy scene into the main scene, run the game and test that it chases the player
 
 # Creating an enemy spawner
-1. Create a `Timer` node as a child of the root node in the main scene
+1. Delete the enemy from the scene as we will be spawning it in code 
+2. Create a `Timer` node as a child of the root node in the main scene
     1. Set `Wait Time` to 4s
     2. Make sure `Autostart` is false
     3. Set `Autostart` to true
-2. Add a script to the root node of the main scene
+3. Add a script to the root node of the main scene
     1. Attach the `timeout()` signal from the timer node to the new script
     2. At the top of the script, add `var enemy = preload("res://Enemy.tscn")`
     3. Inside the timeout function:
