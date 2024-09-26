@@ -1,0 +1,67 @@
+[gd_scene load_steps=8 format=3 uid="uid://cd05rckpufdxr"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_4nio6"]
+[ext_resource type="Texture2D" uid="uid://b1huhmxwhykoc" path="res://icon.svg" id="2_ha22m"]
+[ext_resource type="Script" path="res://hurt_box.gd" id="3_yrbne"]
+[ext_resource type="Script" path="res://hurt_detector.gd" id="4_uhv8i"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yycm6"]
+size = Vector2(124, 124)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dq2ns"]
+size = Vector2(134, 134)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qkbbo"]
+size = Vector2(130, 128)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+position = Vector2(568, 308)
+script = ExtResource("1_4nio6")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+texture = ExtResource("2_ha22m")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+shape = SubResource("RectangleShape2D_yycm6")
+
+[node name="HurtDetector" type="Area2D" parent="CharacterBody2D"]
+script = ExtResource("4_uhv8i")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/HurtDetector"]
+shape = SubResource("RectangleShape2D_dq2ns")
+
+[node name="HurtBox" type="Area2D" parent="."]
+position = Vector2(248, 162)
+script = ExtResource("3_yrbne")
+
+[node name="Sprite2D" type="Sprite2D" parent="HurtBox"]
+texture = ExtResource("2_ha22m")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+shape = SubResource("RectangleShape2D_qkbbo")
+
+[node name="HurtBox2" type="Area2D" parent="."]
+position = Vector2(851, 142)
+script = ExtResource("3_yrbne")
+damage = 20
+
+[node name="Sprite2D" type="Sprite2D" parent="HurtBox2"]
+texture = ExtResource("2_ha22m")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox2"]
+shape = SubResource("RectangleShape2D_qkbbo")
+
+[node name="HurtBox3" type="Area2D" parent="."]
+position = Vector2(442, 510)
+script = ExtResource("3_yrbne")
+damage = 100
+
+[node name="Sprite2D" type="Sprite2D" parent="HurtBox3"]
+texture = ExtResource("2_ha22m")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox3"]
+shape = SubResource("RectangleShape2D_qkbbo")
+
+[connection signal="hurt_box_detected" from="CharacterBody2D/HurtDetector" to="CharacterBody2D" method="_on_hurt_detector_hurt_box_detected"]
