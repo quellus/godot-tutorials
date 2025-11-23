@@ -4,6 +4,6 @@ class_name Enemy extends CharacterBody2D
 
 const SPEED = 100
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	velocity = position.direction_to(player.position) * SPEED
 	move_and_slide()
